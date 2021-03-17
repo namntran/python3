@@ -4,4 +4,4 @@ length = float(input("Length of park (m): "))
 width = float(input("Width of park (m): "))
 litres = float(input("Litres per square metre: "))
 total = length * width * litres
-print("Litres require = ", total)
+print("Litres required = ", total)
