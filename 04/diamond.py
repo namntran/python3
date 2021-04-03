@@ -9,36 +9,20 @@ Row5: 4 spaces, 1 star
 """
 num = int(input("enter a positive number: "))
 
-# top of diamond
+
 rows = 2 * num-1
-for i in range(0,rows//2+1, 1):
-    for j in range (0,rows-i): # for loop to print empty spaces
+middleRow = rows//2 + 1
+# top of diamond
+for i in range(0,middleRow, 1):
+    for j in range (0, middleRow-i): # for loop to print empty spaces
         print(" ", end="")
     for k in range(0, 2*i+1): # for loop to print "X"
         print("X", end="")
     print("")
-
 # bottom of diamond
 for i in range(rows//2-1, -1, -1): # start midway, inverse pyramid
-    for j in range (0, rows-i): # for loop to print empty spaces
+    for j in range (0, middleRow-i): # for loop to print empty spaces
         print(" ", end="")
     for k in range(0, 2*i+1): # for loop to print "X"
         print("X", end="")
-    print("")
-
-# top of diamond
-rows = 2 * num-1
-for i in range(0,rows//2+1, 1):
-    for j in range (0,rows-i): # for loop to print empty spaces
-        print("0", end="")
-    for k in range(0, 2*i+1): # for loop to print "X"
-        print(k, end="")
-    print("")
-
-# bottom of diamond
-for i in range(rows//2-1, -1, -1): # start midway, inverse pyramid
-    for j in range (0, rows-i): # for loop to print empty spaces
-        print("0", end="")
-    for k in range(0, 2*i+1): # for loop to print "X"
-        print(k, end="")
     print("")
