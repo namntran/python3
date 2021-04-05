@@ -5,10 +5,8 @@ x = 0
 y = 1
 count = 0
 length = int(input("Enter a positive number: "))
-n_elements = 4
 # generate the Fibonacci sequence
 while x < length:
-	# print(x, end = "\n") # temp
 	list1.append(x)
 	z = x + y
 	# Modify values
@@ -27,6 +25,7 @@ for l in matrix:
 		# use map function to convert items in list to a string and then join use space ' ' as separator
 		print (' '.join(map(str, l)))
 """
+# matrices using numpy
 import numpy as np
 a = np.array([list1])
 print a.reshape((3,4))
