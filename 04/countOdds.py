@@ -28,7 +28,7 @@ for num in list1: # iterating each number in list
 # median = statistics.median(list1)
 
 # print ("Even numbers entered: ", len(list2))
-print ("Positive numbers entered: ", len(list3))
+print (len(list3), "positive numbers entered")
 # print("Numbers entered in ascending order: ", sorted(list1)) # prints the list of sorted numbers
 # print ("Number of items in list: ", len(list1))
 # print(f'Total of numbers: {total}, Average of numbers: {avg}')
