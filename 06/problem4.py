@@ -52,7 +52,7 @@ averageCourse4 = get_average(course4)
 # add the average of each course to a list
 highestAverageCourseMarks = [averageCourse1, averageCourse2, averageCourse3, averageCourse4]
 
-# print(course1, course2, course3, course4) # temporary value for debugging
-# print(averageCourse1, averageCourse2, averageCourse3, averageCourse4) # temporary value for debugging
+# print("Course 1 results: ", course1,  "Course 2 results: ", course2,  "Course 3 results: ", course3, "Course 4 results: ", course4) # temporary value for debugging
+# print("Average Course 1 results: ", averageCourse1, "Average Course 2 results: ", averageCourse2, "Average Course 3 results: ", averageCourse3, "Average Course 4 results: ", averageCourse4) # temporary value for debugging
 # printing the highest average course marks from list
 print('The highest average mark of courses: ', max(highestAverageCourseMarks))
