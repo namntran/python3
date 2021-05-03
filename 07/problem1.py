@@ -17,6 +17,7 @@ if(file):
     line = file.read()
     # split lines using split() method to return list of string separated by new line
     sentence = line.split('\n')
+    # use len() method to count the size/ length of list
     total_lines = len(sentence)
     # remove empty lines - list comprehension - don't need append()
     sentence = [i for i in sentence if i]
