@@ -29,6 +29,7 @@ if(file):
 file = open(target_file, "w")
 # traverse file and write to target file
 for i in sentence:
+    # writelines() method writes the item of list to the target file
     file.writelines(i + "\n")
 
 file.close()
