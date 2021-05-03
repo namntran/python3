@@ -1,5 +1,5 @@
 # prompts for the name of the file to read
-# print the first two lines and last two lines
+# print the first two lines and prints the last two lines
 
 # ask user for file name
 path = input("File name: ")
