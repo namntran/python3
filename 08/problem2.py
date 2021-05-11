@@ -10,12 +10,12 @@ def getCommonElements(output):
 
 # use while loop to end input blank line
 while True:
-		# ask user for input string
-		list1 = str(input("List 1: "))
-		list2 = str(input("List 2: "))
-		# check if sentence empty, if so break out of loop
-		if len(list1) or len(list2) == 0:
-			break
+	# ask user for input string
+	list1 = str(input("List 1: "))
+	list2 = str(input("List 2: "))
+	# check if sentence empty, if so break out of loop
+	if len(list1) or len(list2) == 0:
+		break
 
 # split string into separate characters
 list1 = list1.split()
