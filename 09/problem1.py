@@ -1,6 +1,12 @@
-# Adder REPL
+# Adder REPL has following statements
+# quit
+# input (prompt user for variable)
+# gets (assigns value to variable)
+# adds (adds value to variable)
+# var is a string that only has letters and no digits
+# val is letters or digits
 
-# dictionary to store letters of alphabet
+# dictionary to store letters of alphabet using key: value pairs
 alphabet = {
     'a':'1',
     'b':'2',
@@ -29,83 +35,86 @@ alphabet = {
     'y':'25',
     'z':'26',
 }
+# dict() function creates an empty dictionary to store and retrieve values
+# need empty dictionary with unique keys for every new variable created
+lookUpTable = dict()
 
-m = dict()
-
-def in_alphabet(var_name):
-    """function to check if character is a letter in alphabet"""
+def in_alphabet(variable_name):
+    """function to check type is letter"""
     # for loop to traverse sentence
-    for character in var_name:
+    for character in variable_name:
         # check if character in defined alphabet dictionary
         if character not in alphabet:
             return False
     return True
 
-def is_digit(val):
-    """function to check if character is a number"""
+def is_digit(value):
+    """function to check type is number"""
     # for loop to travere line by line
-    for character in val:
+    for character in value:
         # check if character in user input is a number using isdigit() method and return boolean value
         if character.isdigit() == False:
             return False
     return True
 
-# var is variable name contains only letters
-def get_var(var_name):
-    """function to assign variable"""
-    if not in_alphabet(var_name):
+def assign_variable(variable_name):
+    """function to assign value to variable name in dictionary"""
+    if not in_alphabet(variable_name):
         print(f"Syntax Error.")
         return
-    val = input(f"Enter a value for {var_name}: ")
-    if not is_digit(val):
+    value = input(f"Enter a value for {variable_name}: ")
+    if not is_digit(value):
         print(f"Syntax Error.")
         return
-    m[var_name] = int(val)
+    # update dictionary
+    lookUpTable[variable_name] = int(value)
 
-def print_var(var_name):
-    """function to print output to terminal"""
-    if is_digit(var_name):
-        print(f"{var_name}")
-        return
-    if not in_alphabet(f"{var_name}"):
+def update_variable(variable, value):
+    """function to assign variable to value in dictionary"""
+    if not in_alphabet(variable):
         print(f"Syntax Error.")
         return
-    if var_name not in m:
-        print(f"{var_name} is undefined.")
+    if is_digit(value):
+        lookUpTable[variable] = int(value)
         return
-    print(f"{var_name} equals {str(m[var_name])}")
+    if value not in lookUpTable:
+        print(f"{value} is undefined.")
+        return
+    # update dictionary
+    lookUpTable[variable] = lookUpTable[value]
 
-def copy_var(var, val):
-    """function description"""
-    if not in_alphabet(var):
+def add_variable(variable, value):
+    """function to add value to variable in dictionary"""
+    if not in_alphabet(variable):
         print(f"Syntax Error.")
         return
-    if is_digit(val):
-        m[var] = int(val)
+    if is_digit(value):
+        lookUpTable[variable] += value
         return
-    if val not in m:
-        print(f"{val} is undefined.")
-        return
-    m[var] = m[val]
-
-def add_var(var, val):
-    """function description"""
-    if not in_alphabet(var):
+    if not in_alphabet(value):
         print(f"Syntax Error.")
         return
-    if is_digit(val):
-        m[var] += val
+    if value not in lookUpTable:
+        print(f"{value} is undefined.")
         return
-    if not in_alphabet(val):
+    # update dictionary
+    lookUpTable[variable] += lookUpTable[value]
+
+def print_var(variable_name):
+    """function to calculate variable name and value"""
+    if is_digit(variable_name):
+        print(f"{variable_name}")
+        return
+    if not in_alphabet(f"{variable_name}"):
         print(f"Syntax Error.")
         return
-
-    if val not in m:
-        print(f"{val} is undefined.")
+    if variable_name not in lookUpTable:
+        print(f"{variable_name} is undefined.")
         return
-    m[var] += m[val]
+    # print variable names and value
+    print(f"{variable_name} equals {str(lookUpTable[variable_name])}")
 
-# print welcome message to terminal
+# print welcome message
 print(f"Welcome to the Adder REPL.")
 # sentinel pattern using while loop
 while True:
@@ -116,25 +125,28 @@ while True:
         print(f"Goodbye.")
         break
 
+    # split string using split() method
     user_input = sentence.split()
 
+    # if length of sentence equals to 1, then print error message
     if len(user_input) == 1:
         print(f"Syntax Error.")
 
+    # if length of sentence equals to 2, then first user input is "input" or "print"
     elif len(user_input) == 2:
-        if user_input[0] == 'input':
-            # call function
-            get_var(user_input[1])
-        elif user_input[0] == 'print':
+        if user_input[0] == "input":
+            assign_variable(user_input[1])
+        elif user_input[0] == "print":
             print_var(user_input[1])
         else:
             print(f"Syntax Error.")
 
+    # if length of sentence equals to 3, second user input is "add" or "gets"
     elif len(user_input) == 3:
-        if user_input[1] == 'gets':
-            copy_var(user_input[0], user_input[2])
-        elif user_input[1] == 'adds':
-            add_var(user_input[0], user_input[2])
+        if user_input[1] == "gets":
+            update_variable(user_input[0], user_input[2])
+        elif user_input[1] == "adds":
+            add_variable(user_input[0], user_input[2])
         else:
             print(f"Syntax Error.")
 
