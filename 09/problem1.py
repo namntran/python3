@@ -57,26 +57,17 @@ def is_digit(value):
             return False
     return True
 
-def assign_variable(variable_name):
-    """function to assign value to variable name in dictionary"""
-    if not in_alphabet(variable_name):
-        print(f"Syntax Error.")
-        return
-    value = input(f"Enter a value for {variable_name}: ")
-    if not is_digit(value):
-        print(f"Syntax Error.")
-        return
-    # update dictionary
-    lookUpTable[variable_name] = int(value)
-
 def update_variable(variable, value):
-    """function to assign variable to value in dictionary"""
+    """function to assign variable to value"""
+    # variable name only contains letters, check type
     if not in_alphabet(variable):
         print(f"Syntax Error.")
         return
+    # check value type
     if is_digit(value):
         lookUpTable[variable] = int(value)
         return
+    # check value in dictionary
     if value not in lookUpTable:
         print(f"{value} is undefined.")
         return
@@ -84,30 +75,48 @@ def update_variable(variable, value):
     lookUpTable[variable] = lookUpTable[value]
 
 def add_variable(variable, value):
-    """function to add value to variable in dictionary"""
-    if not in_alphabet(variable):
-        print(f"Syntax Error.")
-        return
+    """function to add value to variable"""
+    # check value type
     if is_digit(value):
         lookUpTable[variable] += value
         return
+    # check value type
     if not in_alphabet(value):
         print(f"Syntax Error.")
         return
+    # check dictionary
     if value not in lookUpTable:
         print(f"{value} is undefined.")
         return
     # update dictionary
     lookUpTable[variable] += lookUpTable[value]
 
+def assign_variable(variable_name):
+    """function to prompt user to enter value for variable"""
+    # variable name only contains letters, check type
+    if not in_alphabet(variable_name):
+        print(f"Syntax Error.")
+        return
+    # prompt user to enter a value
+    value = input(f"Enter a value for {variable_name}: ")
+    # check value type of user input
+    if not is_digit(value):
+        print(f"Syntax Error.")
+        return
+    # update dictionary
+    lookUpTable[variable_name] = int(value)
+
 def print_var(variable_name):
     """function to calculate variable name and value"""
+    # check value type
     if is_digit(variable_name):
         print(f"{variable_name}")
         return
+    # variable names only contain letters, check type
     if not in_alphabet(f"{variable_name}"):
         print(f"Syntax Error.")
         return
+    # variable names only contain letters, check dictionary
     if variable_name not in lookUpTable:
         print(f"{variable_name} is undefined.")
         return
@@ -128,11 +137,15 @@ while True:
     # split string using split() method
     user_input = sentence.split()
 
+    # if length of sentence equals to 0, then print error message
+    if len(user_input) == 0:
+        print(f"Please enter valid command.")
+
     # if length of sentence equals to 1, then print error message
-    if len(user_input) == 1:
+    elif len(user_input) == 1:
         print(f"Syntax Error.")
 
-    # if length of sentence equals to 2, then first user input is "input" or "print"
+    # if length of sentence equals to 2, then first command is "input" or "print"
     elif len(user_input) == 2:
         if user_input[0] == "input":
             assign_variable(user_input[1])
@@ -141,7 +154,7 @@ while True:
         else:
             print(f"Syntax Error.")
 
-    # if length of sentence equals to 3, second user input is "add" or "gets"
+    # if length of sentence equals to 3, second command is "gets" or "add"
     elif len(user_input) == 3:
         if user_input[1] == "gets":
             update_variable(user_input[0], user_input[2])
