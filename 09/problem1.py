@@ -39,24 +39,41 @@ alphabet = {
 # need empty dictionary with unique keys for every new variable created
 lookUpTable = dict()
 
-def in_alphabet(variable_name):
-    """function to check type is letter"""
-    # for loop to traverse sentence
-    for character in variable_name:
-        # check if character in defined alphabet dictionary
-        if character not in alphabet:
-            return False
-    return True
+# function 1
+def assign_variable(variable_name):
+    """function to prompt user to enter value for variable"""
+    # variable name only contains letters, call function 6 to check type
+    if not in_alphabet(variable_name):
+        print(f"Syntax Error.")
+        return
+    # prompt user to enter a value
+    value = input(f"Enter a value for {variable_name}: ")
+    # check value type of user input, call function 7 to check type
+    if not is_digit(value):
+        print(f"Syntax Error.")
+        return
+    # update dictionary
+    lookUpTable[variable_name] = int(value)
 
-def is_digit(value):
-    """function to check type is number"""
-    # for loop to travere line by line
-    for character in value:
-        # check if character in user input is a number using isdigit() method and return boolean value
-        if character.isdigit() == False:
-            return False
-    return True
+# function 2
+def print_var(variable_name):
+    """function to print variable name and value"""
+    # check value type
+    if is_digit(variable_name):
+        print(f"{variable_name}")
+        return
+    # variable names only contain letters, check type
+    if not in_alphabet(f"{variable_name}"):
+        print(f"Syntax Error.")
+        return
+    # variable names only contain letters, check dictionary
+    if variable_name not in lookUpTable:
+        print(f"{variable_name} is undefined.")
+        return
+    # print variable names and value
+    print(f"{variable_name} equals {str(lookUpTable[variable_name])}")
 
+# function 3
 def update_variable(variable, value):
     """function to assign variable to value"""
     # variable name only contains letters, check type
@@ -74,6 +91,7 @@ def update_variable(variable, value):
     # update dictionary
     lookUpTable[variable] = lookUpTable[value]
 
+# function 5
 def add_variable(variable, value):
     """function to add value to variable"""
     # check value type
@@ -91,37 +109,25 @@ def add_variable(variable, value):
     # update dictionary
     lookUpTable[variable] += lookUpTable[value]
 
-def assign_variable(variable_name):
-    """function to prompt user to enter value for variable"""
-    # variable name only contains letters, check type
-    if not in_alphabet(variable_name):
-        print(f"Syntax Error.")
-        return
-    # prompt user to enter a value
-    value = input(f"Enter a value for {variable_name}: ")
-    # check value type of user input
-    if not is_digit(value):
-        print(f"Syntax Error.")
-        return
-    # update dictionary
-    lookUpTable[variable_name] = int(value)
+# function 6
+def in_alphabet(variable_name):
+    """function to check type is letter"""
+    # for loop to traverse sentence
+    for character in variable_name:
+        # check if character in defined alphabet dictionary
+        if character not in alphabet:
+            return False
+    return True
 
-def print_var(variable_name):
-    """function to calculate variable name and value"""
-    # check value type
-    if is_digit(variable_name):
-        print(f"{variable_name}")
-        return
-    # variable names only contain letters, check type
-    if not in_alphabet(f"{variable_name}"):
-        print(f"Syntax Error.")
-        return
-    # variable names only contain letters, check dictionary
-    if variable_name not in lookUpTable:
-        print(f"{variable_name} is undefined.")
-        return
-    # print variable names and value
-    print(f"{variable_name} equals {str(lookUpTable[variable_name])}")
+# function 7
+def is_digit(value):
+    """function to check type is number"""
+    # for loop to travere line by line
+    for character in value:
+        # check if character in user input is a number using isdigit() method and return boolean value
+        if character.isdigit() == False:
+            return False
+    return True
 
 # print welcome message
 print(f"Welcome to the Adder REPL.")
@@ -148,8 +154,10 @@ while True:
     # if length of sentence equals to 2, then first command is "input" or "print"
     elif len(user_input) == 2:
         if user_input[0] == "input":
+            # call function 1
             assign_variable(user_input[1])
         elif user_input[0] == "print":
+            # call function 2
             print_var(user_input[1])
         else:
             print(f"Syntax Error.")
@@ -157,8 +165,10 @@ while True:
     # if length of sentence equals to 3, second command is "gets" or "add"
     elif len(user_input) == 3:
         if user_input[1] == "gets":
+            # call function 3
             update_variable(user_input[0], user_input[2])
         elif user_input[1] == "adds":
+            # call function 4
             add_variable(user_input[0], user_input[2])
         else:
             print(f"Syntax Error.")
