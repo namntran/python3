@@ -1,59 +1,36 @@
-#program calculates the total trip distance
+# program calculates the total trip distance on a grid
 
-# store 2D coordinates in tuples
-# xs = [C, B, Y]
-# ys = [2, 5, 25]
-
-# import math
-# trips = input("Enter trip map references: ").strip()
-# trips = trips.split(' ')
-# bad = False
-# for item in trips:
-#     if((item[:1]).isalpha() == (item[:1]).isupper() == (item[1:]).isdigit() == True):
-#         pass
-#     else:
-#         print("Bad reference:",item)
-#         bad =True
-# if(not bad):
-#     distance = 0
-#     for i in range(len(trips)-1):
-#         d1 = ord(trips[i+1][:1]) - ord(trips[i][:1])
-#         d2 = int(trips[i+1][1:]) - int(trips[i][1:])
-#         distance += math.sqrt(d1**2 + d2**2) * 0.5
-#     print("Total distance =","%0.1f"%distance,"km")
-
-
+# need math library for square root function
 import math
 
-# variables to store coordinates from user input
-digits = "0123456789"
-letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# variable to store letters, need to find index of alphabet to convert element in string of letters to int number
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def get_index(x_value):
-    """function to find index of letter in alphabet"""
+    """function to find index of letter in alphabet""" # convert string to int number
     index = 0
-    while index  < 26:
-        if letters[index] == x_value:
+    while index < 26: # number of letters in alphabet
+        if alphabet[index] == x_value:
             break
         index += 1
-    return index + 1
+    return index
 
 def get_number(y_value):
-    """function to convert string to integer number"""
-    number = 0
+    """function to get number"""
+    index = 0
     for coordinates in y_value:
-        if coordinates in digits:
-            number = number * 10 + int(coordinates)
-    return number
+        # check value is a number using isdigit() method and return boolean value
+        if coordinates.isdigit() == True:
+            index = index * 10 + int(coordinates)
+    return index
 
-def get_distance(s1, s2):
+def get_distance(destination1, destination2): # example B3, E2, each grid is 0.5 km
     """function to find the distance between two coordinates"""
-    n1 = get_number(s1)
-    n2 = get_number(s2)
-    # get length of each triangle
-    a = abs(get_index(s1[0]) - get_index(s2[0])) * 0.5
-    b = abs(n1-n2) * 0.5
-    # distance = pythagoras theorum is a2 + b2 = c2
+    # get difference between x values
+    a = abs(get_index(destination1[0]) - get_index(destination2[0])) * 0.5 # use abs to ignore negative numbers
+    # get difference between y values
+    b = abs((get_number(destination1))-(get_number(destination2))) * 0.5 # use abs to ignore negative numbers
+    # calculate distance between destination using Pythagoras theorum (a2 + b2 = c2)
     distance = math.sqrt((a)**2 + (b)**2)
     return distance
 
@@ -62,18 +39,20 @@ coordinates = input("Enter trip map references : ").strip()
 # split each coordinate into seperate elements
 coordinates = coordinates.split()
 distance = 0
-count = 0
+index = 0
 
+# use for loop to traverse through user input
 for coordinate in coordinates:
     # check for badly formatted map references
-    if coordinate[0] not in letters and get_number(coordinate) not in range(1,27):
+    if coordinate[0] not in alphabet and get_number(coordinate) not in range(1,27):
         print("Bad reference : ", coordinate)
         # abort the program if user input error
         exit()
 
-while count<len(coordinates)-1:
-    # call function
-    distance += get_distance(coordinates[count], coordinates[count+1])
-    count += 1
+# use while loop to traverse through user input
+while index < len(coordinates)-1:
+    # calculate total distance between the sum of coordinates
+    distance += get_distance(coordinates[index], coordinates[index + 1])
+    index += 1
 # print distance to 1 decimal place
 print("Total Distance = ","%0.1f"%distance, "km")
