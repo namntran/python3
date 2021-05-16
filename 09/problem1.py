@@ -42,13 +42,13 @@ lookUpTable = dict()
 # function 1
 def assign_variable(variable_name):
     """function to prompt user to enter value for variable"""
-    # variable name only contains letters, call function 6 to check type
+    # variable name only contains letters, call function 5 to check type
     if not in_alphabet(variable_name):
         print(f"Syntax Error.")
         return
     # prompt user to enter a value
     value = input(f"Enter a value for {variable_name}: ")
-    # check value type of user input, call function 7 to check type
+    # check value type of user input, call function 6 to check type
     if not is_digit(value):
         print(f"Syntax Error.")
         return
@@ -56,13 +56,13 @@ def assign_variable(variable_name):
     lookUpTable[variable_name] = int(value)
 
 # function 2
-def print_var(variable_name):
+def print_variable(variable_name):
     """function to print variable name and value"""
-    # check value type
+    # check value type, call function 6 to check type
     if is_digit(variable_name):
         print(f"{variable_name}")
         return
-    # variable names only contain letters, check type
+    # variable names only contain letters, call function 5 to check type
     if not in_alphabet(f"{variable_name}"):
         print(f"Syntax Error.")
         return
@@ -76,11 +76,11 @@ def print_var(variable_name):
 # function 3
 def update_variable(variable, value):
     """function to assign variable to value"""
-    # variable name only contains letters, check type
+    # variable name only contains letters, call function 5 to check type
     if not in_alphabet(variable):
         print(f"Syntax Error.")
         return
-    # check value type
+    # check value type, call function 6
     if is_digit(value):
         lookUpTable[variable] = int(value)
         return
@@ -91,14 +91,14 @@ def update_variable(variable, value):
     # update dictionary
     lookUpTable[variable] = lookUpTable[value]
 
-# function 5
+# function 4
 def add_variable(variable, value):
     """function to add value to variable"""
-    # check value type
+    # check value type, call function 6
     if is_digit(value):
         lookUpTable[variable] += value
         return
-    # check value type
+    # check value type, call function 5
     if not in_alphabet(value):
         print(f"Syntax Error.")
         return
@@ -109,22 +109,22 @@ def add_variable(variable, value):
     # update dictionary
     lookUpTable[variable] += lookUpTable[value]
 
-# function 6
+# function 5
 def in_alphabet(variable_name):
     """function to check type is letter"""
     # for loop to traverse sentence
     for character in variable_name:
-        # check if character in defined alphabet dictionary
+        # check value not in alphabet dictionary
         if character not in alphabet:
             return False
     return True
 
-# function 7
+# function 6
 def is_digit(value):
     """function to check type is number"""
     # for loop to travere line by line
     for character in value:
-        # check if character in user input is a number using isdigit() method and return boolean value
+        # check value is a number using isdigit() method and return boolean value
         if character.isdigit() == False:
             return False
     return True
@@ -153,20 +153,24 @@ while True:
 
     # if length of sentence equals to 2, then first command is "input" or "print"
     elif len(user_input) == 2:
+        # if first command is input
         if user_input[0] == "input":
             # call function 1
             assign_variable(user_input[1])
+        # if first command is print
         elif user_input[0] == "print":
             # call function 2
-            print_var(user_input[1])
+            print_variable(user_input[1])
         else:
             print(f"Syntax Error.")
 
     # if length of sentence equals to 3, second command is "gets" or "add"
     elif len(user_input) == 3:
+        # if second command is gets
         if user_input[1] == "gets":
             # call function 3
             update_variable(user_input[0], user_input[2])
+        # if second command is adds
         elif user_input[1] == "adds":
             # call function 4
             add_variable(user_input[0], user_input[2])
