@@ -10,6 +10,10 @@ class GoCard:
         # empty list to store transactions for event, amount, balance
         self.transaction_list = []
 
+    def getBalance(self):
+        """Return the current account balance"""
+        return self.balance
+
     def rideTicket(self, cost):
         """Subtract cost of ticket from balance and add to transaction list"""
         self.balance -= cost
@@ -26,10 +30,6 @@ class GoCard:
         # update the transaction
         self.transaction_list.append(transaction)
 
-    def getBalance(self):
-        """Return the current account balance"""
-        return self.balance
-
     def printStatement(self):
         """Return the current account balance"""
         # print the first row
@@ -42,6 +42,7 @@ class GoCard:
             print("{:<10} {:>20} {:>20}".format(e, a, b))
         # print the balance in the last row
         print("Final balance{:>39}".format(b))
+
 # use sentinel pattern
 while True:
     try:
@@ -51,6 +52,7 @@ while True:
         break
     except:
         print("Enter a valid number")
+
 # use sentinel pattern
 while True:
     userInput = input("? ")
