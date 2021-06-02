@@ -1,5 +1,5 @@
 class DNS:
-    # constructor
+    # constructor and initialise
     def __init__(self):
         self.dns = dict()
 
@@ -11,50 +11,63 @@ class DNS:
     def find_Domain(self, domain):
         if domain not in self.dns:
             return None
-        return self.dns.get(domain)
+        else:
+            return self.dns.get(domain)
 
-# help menu to list available commands for user
+# welcome message function to greet user
+def welcomeMessage():
+    print('Welcome to DNS Server')
+    print('Type help for available commands')
+
+# help menu function to list available commands for user if requested
 def helpMenu():
     print("Available commands are 'find', 'add', 'quit',")
 
-# welcome message
-print('Welcome to DNS Server')
-print('Type help for available commands')
+# test program allows user to test class by typing in fake domain names and IP addresses to update the DNS and domain names to lookup
+def testProgram():
+# use sentinel pattern
+    while True:
+        try:
+            # ask user for input
+            userInput = input('$$$ ')
+            # convert user input to lower case, check if user enters help
+            if userInput.lower() == 'help':
+            # call helpMenu() function to print available commands
+                helpMenu()
+
+            # convert user input to lower case, check if user enters find
+            elif userInput.lower() == 'find':
+                # ask for user input
+                domain = input('Enter domain: ')
+                # no record found
+                if dns.find_Domain(domain) == None:
+                    print('No record found')
+                else: # if record found, print domain name
+                    print('IP Address ' + dns.find_Domain(domain))
+
+            # convert user input to lower case, check if user enters add DNS record (domain and IP address)
+            elif userInput.lower() == 'add':
+                # ask for user input
+                domain = input('Enter domain: ')
+                # ask for user input
+                ipa = input('Enter IP Address: ')
+                # add domain name and IP address record from user input
+                dns.add_DomainIPA(domain, ipa)
+
+            # quit and exit program
+            elif userInput.lower() == 'quit':
+                print("Goodbye")
+                break
+
+            # catch all other user inputs
+            else:
+                print('Bad command')
+        except:
+            print("Type help for valid command")
+
 # variable to store new DNS record
 dns = DNS()
-
-# use sentinel pattern
-while True:
-    # ask user for input
-    userInput = input('$$$ ')
-    # call helpMenu() function to print available commands
-    if userInput.lower() == 'help':
-        helpMenu()
-
-    # find DNS record
-    elif userInput.lower() == 'find':
-        # ask for user input
-        domain = input('Enter domain: ')
-        # no record found
-        if dns.find_Domain(domain) == None:
-            print('No record found')
-        else: # if record found, print domain name
-            print('IP Address ' + dns.find_Domain(domain))
-
-    # add DNS record
-    elif userInput.lower() == 'add':
-        # ask for user input
-        domain = input('Enter domain: ')
-        # ask for user input
-        ipa = input('Enter IP Address: ')
-        # add domain name and IP address record from user input
-        dns.add_DomainIPA(domain, ipa)
-
-    # quit and exit program
-    elif userInput.lower() == 'q' or 'quit':
-        print("Goodbye")
-        break
-
-    # catch all other user inputs
-    else:
-        print('Bad command')
+# call welcome message function
+welcomeMessage()
+# call test program function
+testProgram()
